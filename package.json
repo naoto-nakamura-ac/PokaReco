@@ -4,8 +4,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "dev": "nodemon server.js",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "migrate-latest": "npx knex migrate:latest --knexfile server/db/knexfile.js",
+    "migrate-down": "npx knex migrate:down --knexfile server/db/knexfile.js",
+    "seed-data": "npx knex seed:run --knexfile server/db/knexfile.js",
     "build": "cd front && npm install && npm run build && rm -rf ../public && cp -r dist ../public"
   },
   "keywords": [],
@@ -13,7 +16,10 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^5.1.0"
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "knex": "^3.1.0",
+    "pg": "^8.16.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
