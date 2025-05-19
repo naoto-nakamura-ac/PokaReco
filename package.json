@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --require test/setup.js",
     "start": "node index.js",
     "dev": "nodemon index.js",
     "migrate-latest": "npx knex migrate:latest --knexfile server/db/knexfile.js",
@@ -24,6 +24,9 @@
     "pg": "^8.16.0"
   },
   "devDependencies": {
+    "chai": "^4.5.0",
+    "chai-http": "^4.4.0",
+    "mocha": "^11.3.0",
     "nodemon": "^3.1.10"
   }
 }

@@ -11,9 +11,9 @@ module.exports = {
       port: process.env.PORT || 5432,
     },
     migrations: {
-      directory: './data/migrations',
+      directory: path.resolve(__dirname, './data/migrations'),
     },
-    seeds: { directory: './data/seeds' },
+    seeds: { directory: path.resolve(__dirname, './data/seeds') },
   },
 
   production: {
