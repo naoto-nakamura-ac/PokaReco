@@ -3,6 +3,7 @@ exports.up = async (knex) => {
     table.increments('id').primary();
     table.integer('user_id').notNullable();
     table.foreign('user_id').references('users.id').onDelete('CASCADE');
+    table.string('name').notNullable();
     table.date('birthday').notNullable();
     table.string('gender').notNullable();
     table.timestamp('created_at', { useTz: true }).defaultTo(knex.fn.now());
