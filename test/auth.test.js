@@ -7,7 +7,7 @@ const db = require('../server/db/index');
 const app = require('../server.js');
 const expect = chai.expect;
 
-describe('authController', async () => {
+describe('authController', () => {
   let request;
 
   before(() => {
@@ -38,7 +38,9 @@ describe('authController', async () => {
   describe('registrater', () => {
     it('ユーザーの新規登録ができる', async () => {
       const expected = { message: 'User registered' };
-      const res = await request.post('/api/auth/register').send(userDummyData);
+      const res = await request
+        .post('/api/auth/registrater')
+        .send(userDummyData);
       expect(res.statusCode).to.equal(201);
       expect(res.body).to.deep.equal(expected);
     });
