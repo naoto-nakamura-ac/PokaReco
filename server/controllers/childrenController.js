@@ -11,6 +11,7 @@ const addChild = async (req, res) => {
       return res.status(400).json({ message: 'フィールドが欠損しています' });
     }
 
+    // #TODO 子供の複数人対応
     const exitChild = await Children.findChildren(req.user.id);
     if (exitChild.length > 0) {
       return res
