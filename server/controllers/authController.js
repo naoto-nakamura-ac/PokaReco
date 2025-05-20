@@ -17,7 +17,7 @@ const login = async (req, res) => {
     if (!validation(email, password)) {
       return res.status(400).json({ message: 'フィールドが欠損しています' });
     }
-    const user = await User.userFind(email);
+    const user = await User.findUser(email);
     if (!user) {
       return res.status(401).json({ error: 'ユーザーが見つかりません' });
     }
@@ -70,7 +70,7 @@ const registrater = async (req, res) => {
     if (!validation(email, password, name)) {
       return res.status(400).json({ message: 'フィールドが欠損しています' });
     }
-    const exitUser = await User.userFind(email);
+    const exitUser = await User.findUser(email);
     if (exitUser) {
       return res
         .status(400)

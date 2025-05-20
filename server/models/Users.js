@@ -15,7 +15,7 @@ module.exports = {
       .returning(['email', 'name']);
   },
 
-  async userFind(email) {
+  async findUser(email) {
     return await db(USERS_TABLE).select().where('email', '=', email).first();
   },
 };
