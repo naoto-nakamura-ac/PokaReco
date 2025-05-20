@@ -44,7 +44,8 @@ describe('authController', () => {
       expect(res.statusCode).to.equal(201);
       expect(res.body).to.deep.equal(expected);
     });
-
+  });
+  describe('login', () => {
     it('ログインが成功する', async () => {
       const res = await request.post('/api/auth/login').send({
         email: userDummyData.email,
@@ -53,7 +54,8 @@ describe('authController', () => {
       expect(res.statusCode).to.equal(200);
       expect(res.body).to.have.property('token');
     });
-
+  });
+  describe('logout', () => {
     it('ログアウトが成功する', async () => {
       const res = await request.post('/api/auth/logout');
       expect(res.statusCode).to.equal(200);
