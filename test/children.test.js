@@ -76,4 +76,34 @@ describe('childrenController', () => {
       expect(res.body).to.deep.equal(expected);
     });
   });
+
+  describe('deleteChild', () => {
+    it('子供を削除できる', async () => {
+      await request
+        .post('/api/auth/registrater')
+        .send({ email: 'test', name: 'test', password: 'test' });
+
+      const resLogin = await request.post('/api/auth/login').send({
+        email: 'test',
+        password: 'test',
+      });
+
+      const childData = {
+        name: 'test',
+        birthday: '2024-01-01',
+        gender: 'f',
+      };
+      await request
+        .post('/api/children/')
+        .set('Cookie', `session_token=${resLogin.body.token}`)
+        .send(childData);
+
+      const expected = { message: '子供を削除しました' };
+      const res = await request
+        .delete('/api/children/')
+        .set('Cookie', `session_token=${resLogin.body.token}`);
+      expect(res.statusCode).to.equal(201);
+      expect(res.body).to.deep.equal(expected);
+    });
+  });
 });

@@ -34,5 +34,17 @@ const addChild = async (req, res) => {
     return res.status(500).json({ message: 'Server Error' });
   }
 };
-
-module.exports = { addChild };
+const deleteChild = async (req, res) => {
+  try {
+    const exitChild = await Children.findChildren(req.user.id);
+    if (exitChild.length === 0) {
+      return res.status(400).json({ message: '子供が登録されていません' });
+    }
+    await Children.delChild(exitChild[0].id);
+    return res.status(201).json({ message: '子供を削除しました' });
+  } catch (error) {
+    console.log('error: ', error);
+    return res.status(500).json({ message: 'Server Error' });
+  }
+};
+module.exports = { addChild, deleteChild };

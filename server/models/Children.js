@@ -13,4 +13,8 @@ module.exports = {
   async insChild(insertData) {
     return await db(CHILDREN_TABLE).insert(insertData).returning(['name']);
   },
+
+  async delChild(child_id) {
+    await db(CHILDREN_TABLE).where('id', '=', child_id).del();
+  },
 };
