@@ -32,7 +32,7 @@ describe('childrenController', () => {
     request.close();
   });
 
-  describe('add', () => {
+  describe('addChild', () => {
     it('子供が追加できる', async () => {
       const childData = {
         user_id: 2,
@@ -49,7 +49,7 @@ describe('childrenController', () => {
         password: userDummyData.password,
       });
       const res = await request
-        .post('/api/children/add')
+        .post('/api/children/')
         .set('Cookie', `session_token=${resLogin.body.token}`)
         .send(childData);
       expect(res.statusCode).to.equal(201);
@@ -69,7 +69,7 @@ describe('childrenController', () => {
         password: userDummyData.password,
       });
       const res = await request
-        .post('/api/children/add')
+        .post('/api/children/')
         .set('Cookie', `session_token=${resLogin.body.token}`)
         .send(childData);
       expect(res.statusCode).to.equal(400);

@@ -4,7 +4,7 @@ const validation = (...args) => {
   return args.every((element) => element);
 };
 
-const add = async (req, res) => {
+const addChild = async (req, res) => {
   try {
     const { name, birthday, gender } = req.body;
     if (!validation(name, birthday, gender)) {
@@ -34,4 +34,4 @@ const add = async (req, res) => {
   }
 };
 
-module.exports = { add };
+module.exports = { addChild };
