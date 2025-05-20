@@ -67,10 +67,41 @@ describe('userController', () => {
   });
 
   describe('myAccount', () => {
-    it('現在のユーザーが自分の情報を取得できる', async () => {
+    it('ユーザーが自分の情報を取得できる', async () => {
       const expected = {
         email: 'fuga@fuga.com',
         name: 'mocha',
+        children: [],
+      };
+      const resLogin = await request.post('/api/auth/login').send({
+        email: userDummyData.email,
+        password: userDummyData.password,
+      });
+      const res = await request
+        .get('/api/users/myAccount')
+        .set('Cookie', `session_token=${resLogin.body.token}`);
+      expect(res.statusCode).to.equal(200);
+      expect(res.body).to.deep.equal(expected);
+    });
+
+    it('登録している子ども情報を取得できる', async () => {
+      const userDummyData = {
+        email: 'hoge@hoge.com',
+        name: 'testUser',
+        password: 'password',
+      };
+      const expected = {
+        children: [
+          {
+            birthday: '2023-12-02T15:00:00.000Z',
+            gender: 'm',
+            id: 1,
+            name: 'ポカレコ',
+            user_id: 1,
+          },
+        ],
+        email: 'hoge@hoge.com',
+        name: 'testUser',
       };
       const resLogin = await request.post('/api/auth/login').send({
         email: userDummyData.email,
