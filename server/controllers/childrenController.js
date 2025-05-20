@@ -1,0 +1,37 @@
+const Children = require('../models/Children');
+
+const validation = (...args) => {
+  return args.every((element) => element);
+};
+
+const add = async (req, res) => {
+  try {
+    const { name, birthday, gender } = req.body;
+    if (!validation(name, birthday, gender)) {
+      return res.status(400).json({ message: 'フィールドが欠損しています' });
+    }
+
+    const exitChild = await Children.findChildren(req.user.id);
+    if (exitChild.length > 0) {
+      return res
+        .status(400)
+        .json({ message: '今は一人しか追加できません！今はね。。。' });
+    }
+
+    const newChild = await Children.insChild({
+      user_id: req.user.id,
+      name,
+      birthday,
+      gender,
+    });
+    return res.status(201).json({
+      message: '子供の追加に成功しました',
+      newChildName: newChild[0].name,
+    });
+  } catch (error) {
+    console.log('error: ', error);
+    return res.status(500).json({ message: 'Server Error' });
+  }
+};
+
+module.exports = { add };
