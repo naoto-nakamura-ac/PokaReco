@@ -25,7 +25,7 @@ describe('childrenController', () => {
       .then(() => db.migrate.latest())
       .then(() => db.seed.run())
       .catch(console.error);
-    await request.post('/api/auth/registrater').send(userDummyData);
+    await request.post('/api/auth/register').send(userDummyData);
   });
 
   after(() => {
@@ -80,7 +80,7 @@ describe('childrenController', () => {
   describe('deleteChild', () => {
     it('子供を削除できる', async () => {
       await request
-        .post('/api/auth/registrater')
+        .post('/api/auth/register')
         .send({ email: 'test', name: 'test', password: 'test' });
 
       const resLogin = await request.post('/api/auth/login').send({

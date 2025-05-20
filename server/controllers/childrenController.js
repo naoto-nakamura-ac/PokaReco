@@ -47,4 +47,9 @@ const deleteChild = async (req, res) => {
     return res.status(500).json({ message: 'Server Error' });
   }
 };
-module.exports = { addChild, deleteChild };
+
+const getChildren = async (req, res) => {
+  const children = await Children.findChildren(req.user.id);
+  return res.status(200).json(children);
+};
+module.exports = { addChild, deleteChild, getChildren };

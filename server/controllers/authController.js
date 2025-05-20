@@ -58,13 +58,13 @@ const logout = async (req, res) => {
       secure: isProduction, // 本番環境ではtrue
       sameSite: 'Lax',
     });
-    return res.status(200).end();
+    return res.status(200).json({ message: 'ログアウトしました' });
   } catch (error) {
     console.log('error: ', error);
     return res.status(500).json({ message: 'Server Error' });
   }
 };
-const registrater = async (req, res) => {
+const register = async (req, res) => {
   try {
     const { email, password, name } = req.body;
     if (!validation(email, password, name)) {
@@ -90,4 +90,4 @@ const registrater = async (req, res) => {
   }
 };
 
-module.exports = { login, logout, registrater };
+module.exports = { login, logout, register };
