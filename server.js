@@ -5,6 +5,8 @@ const cookieParser = require('cookie-parser');
 const app = express();
 
 const authRouter = require('./server/routes/authRoutes');
+const usersRouter = require('./server/routes/usersRoutes');
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
@@ -14,5 +16,6 @@ app.get('/api', (req, res) => {
 });
 
 app.use('/api/auth', authRouter);
+app.use('/api/users', usersRouter);
 
 module.exports = app;

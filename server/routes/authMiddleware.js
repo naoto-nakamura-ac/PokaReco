@@ -5,7 +5,7 @@ const authenticate = async (req, res, next) => {
   if (!token) {
     return res.status(401).json({ message: 'ログインしていません' });
   }
-  const session = await Session.findToken(token);
+  const session = await Session.findToken(token); // コントローラ介さずに直接モデルへアクセス
 
   if (!session || session.expires_at < new Date()) {
     return res.status(401).json({ message: '無効なセッション' });

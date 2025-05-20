@@ -7,5 +7,3 @@ router.use(authenticate);
 router.get('/myAccount', myAccount);
 
 module.exports = router;
-
-myAccount;
