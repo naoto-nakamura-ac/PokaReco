@@ -132,7 +132,6 @@ describe('RecordsController', () => {
         .set('Cookie', `session_token=${resLogin.body.token}`);
       expect(res.statusCode).to.equal(200);
       expect(res.body).to.deep.equal(expected);
-      console.log('🍣 ~ records.test.js:136 ~ it ~ res.body:', res.body);
     });
 
     it('指定した期間のレコードが取得できる', async () => {
@@ -183,17 +182,12 @@ describe('RecordsController', () => {
       const insGetRes = await request
         .get('/api/records/')
         .set('Cookie', `session_token=${resLogin.body.token}`);
-      console.log(
-        '🍣 ~ records.test.js:185 ~ it ~ insGetRes.body:',
-        insGetRes.body
-      );
 
       const res = await request
         .get('/api/records/?start=2025-05-01&end=2025-05-31')
         .set('Cookie', `session_token=${resLogin.body.token}`);
       expect(res.statusCode).to.equal(200);
       expect(res.body).to.deep.equal(expected);
-      console.log('🍣 ~ records.test.js:188 ~ it ~ res.body:', res.body);
     });
   });
 });
