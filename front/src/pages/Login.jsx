@@ -1,9 +1,24 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  Heading,
+  Center,
+  FormControl,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  PasswordInput,
+  Button,
+  useNotice,
+} from '@yamada-ui/react';
+import { MailIcon } from '@yamada-ui/lucide';
 
 function Login() {
   const navigate = useNavigate();
-
+  const notice = useNotice({ limit: 1 });
   // 認証状態を取得し済みならDashboardへリダイレクトする
   useEffect(() => {
     (async () => {
@@ -17,6 +32,11 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const [isInvalidEmail, setIsInvalidEmail] = useState(false);
+  const [isInvalidPassword, setIsInvalidPassword] = useState(false);
+
+  const [visible, setVisible] = useState(false);
+
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -29,19 +49,41 @@ function Login() {
     setPassword('');
   };
 
+  const emailBlur = () => {
+    setIsInvalidEmail(true);
+  };
+  const passwordBlur = () => {
+    setIsInvalidPassword(true);
+  };
+
+  const alert = (message) => {
+    notice({
+      title: 'Error',
+      description: message,
+      duration: 3000,
+      status: 'error',
+    });
+  };
+
   const loginAuth = async () => {
     try {
-      const res = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-      clearForm();
-      const data = await res.json();
-      if (res.status === 200) return true;
-      window.alert(data.message);
+      if (email && password) {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+        });
+        clearForm();
+        const data = await res.json();
+        if (res.status === 200) return true;
+        alert(data.message);
+      } else {
+        alert('入力項目が不足しています');
+        setIsInvalidEmail(true);
+        setIsInvalidPassword(true);
+      }
       return false;
     } catch (error) {
       console.log('error: ', error);
@@ -53,74 +95,86 @@ function Login() {
   const navigateDashboard = async () => {
     const success = await loginAuth();
     if (success) {
+      notice({
+        title: 'Success',
+        description: "ログインに成功しました",
+        duration: 3000,
+        status: 'success',
+      })
       navigate('/dashboard');
     }
   };
 
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-        gap: '20px',
-        background: '#FFF',
-      }}
-    >
-      <div
-        style={{
-          padding: '20px',
-          background: '#fff',
-          border: '1px solid #ccc',
-          borderRadius: '8px',
-          boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
-          width: '300px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '5px',
-        }}
-      >
-        <h2>アカウントログイン</h2>
-        <input
-          type="text"
-          placeholder="MailAddress"
-          value={email}
-          onChange={updateEmail}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={updatePassword}
-        />
-        <button
-          style={{
-            width: '100%',
-            marginBottom: '8px',
-            borderRadius: '9999px',
-            border: '1px solid #ccc',
-          }}
-          onClick={navigateDashboard}
-        >
-          ログイン
-        </button>
-        <div style={{ textAlign: 'right' }}>
+    <Center h="100vh">
+      <Card bg="white" w="2xl" padding="xl">
+        <CardHeader>
+          <Heading size="md">アカウントログイン</Heading>
+        </CardHeader>
+        <CardBody>
+          <FormControl
+            label="Email addres"
+            required
+            invalid={isInvalidEmail && !email}
+            onBlur={emailBlur}
+            errorMessage="メールアドレスを入力してください"
+          >
+            <InputGroup>
+              <InputLeftElement>
+                <MailIcon />
+              </InputLeftElement>
+              <Input
+                variant="filled"
+                type="email"
+                placeholder="MailAddress"
+                _placeholder={{ opacity: 1, color: 'yellow.800' }}
+                value={email}
+                onChange={updateEmail}
+              />
+            </InputGroup>
+          </FormControl>
+          <FormControl
+            label="Password"
+            required
+            invalid={isInvalidPassword && !password}
+            onBlur={passwordBlur}
+            errorMessage="メールアドレスを入力してください"
+          >
+            <PasswordInput
+              variant="filled"
+              visible={visible}
+              onVisibleChange={setVisible}
+              placeholder="Password"
+              _placeholder={{ opacity: 1, color: 'yellow.800' }}
+              value={password}
+              onChange={updatePassword}
+            />
+          </FormControl>
+          <Button
+            variant="solid"
+            bg="yellow.300"
+            w="full"
+            borderRadius="9999px"
+            marginBottom="sm"
+            onClick={navigateDashboard}
+          >
+            ログイン
+          </Button>
           <Link
             to="/signup"
             style={{
               fontSize: '12px',
               color: '#3182ce',
               textDecoration: 'none',
+              marginLeft: 'auto',
             }}
             onClick={clearForm}
           >
             新規登録
           </Link>
-        </div>
-      </div>
-    </div>
+        </CardBody>
+      </Card>
+    </Center>
   );
 }
 
