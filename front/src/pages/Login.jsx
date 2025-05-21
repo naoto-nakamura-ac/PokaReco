@@ -126,7 +126,7 @@ function Login() {
               <Input
                 variant="filled"
                 type="email"
-                placeholder="MailAddress"
+                placeholder="***@***"
                 _placeholder={{ opacity: 1, color: 'yellow.800' }}
                 value={email}
                 onChange={updateEmail}
