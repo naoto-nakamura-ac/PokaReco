@@ -85,13 +85,13 @@ function Login() {
         <h2>アカウントログイン</h2>
         <input
           type="text"
-          placeholder="登録するメールアドレスを入力"
+          placeholder="MailAddress"
           value={email}
           onChange={updateEmail}
         />
         <input
           type="password"
-          placeholder="パスワード"
+          placeholder="Password"
           value={password}
           onChange={updatePassword}
         />
