@@ -184,7 +184,7 @@ function Signup() {
             variant="solid"
             bg="yellow.300"
             w="full"
-            borderRadius="9999px"
+            borderRadius="full"
             marginBottom="sm"
             onClick={navigateLogin}
           >

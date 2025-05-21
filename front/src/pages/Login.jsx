@@ -154,7 +154,7 @@ function Login() {
             variant="solid"
             bg="yellow.300"
             w="full"
-            borderRadius="9999px"
+            borderRadius="full"
             marginBottom="sm"
             onClick={navigateDashboard}
           >
