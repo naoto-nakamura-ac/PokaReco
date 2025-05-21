@@ -94,4 +94,4 @@ const register = async (req, res) => {
   }
 };
 
-module.exports = { login, logout, register,authMe };
+module.exports = { login, logout, register, authMe };
