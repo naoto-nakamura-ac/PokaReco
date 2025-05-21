@@ -1,10 +1,14 @@
 // import './App.css';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import logo from '../assets/logo.png'
+import { useEffect, useState } from 'react';
+import logo from '../assets/logo.png';
+import { Button, Center, Image, Box } from '@yamada-ui/react';
+import { ArrowRightIcon } from '@yamada-ui/lucide';
+import PageMotion from '../components/PageMotion';
 
 function Top() {
   const navigate = useNavigate();
+  const [showAnimation, setShowAnimation] = useState(false);
 
   // 認証状態を取得し済みならDashboardへリダイレクトする
   useEffect(() => {
@@ -15,33 +19,39 @@ function Top() {
       }
     })();
   }, []);
-  const buttonStyle = {
-    padding: '12px 24px',
-    backgroundColor: '#b59032',
-    color: '#FFF',
-    border: 'none',
-    borderRadius: '9999px',
-    fontSize: '16px',
-    cursor: 'pointer',
-    transition: 'background-color 0.3s ease',
-  };
+
+  useEffect(() => {
+    let timer;
+    if (showAnimation) {
+      timer = setTimeout(() => {
+        navigate('/login');
+      }, 1500);
+    }
+    // クリーンナップ関数、アンマウントされる時(今回はnavigate)にタイマーをリセット
+    // setTimeoutの返り値(TimerID)を指定して確実にリセットする
+    return () => clearTimeout(timer);
+  }, [showAnimation]);
+
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-        gap: '20px',
-        backgroundColor: '#FFF4D8', // このアプリのベースカラー
-      }}
-    >
-      <img src={logo} alt="logo" style={{width: "450px"}} />
-      <div style={{ display: 'flex', gap: '20px' }}>
-        <button style={buttonStyle} onClick={() => navigate('/login')}>はじめる</button>
-      </div>
-    </div>
+    <Box>
+      {showAnimation ? (
+        <PageMotion />
+      ) : (
+        <Center flexDirection="column">
+          <Image src={logo} alt="logo" boxSize="xl" />
+          <Button
+            colorScheme="amber"
+            size="xl"
+            variant="outline"
+            endIcon={<ArrowRightIcon />}
+            onClick={() => setShowAnimation(true)}
+            disabled={showAnimation}
+          >
+            はじめる
+          </Button>
+        </Center>
+      )}
+    </Box>
   );
 }
 
