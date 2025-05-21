@@ -11,6 +11,10 @@ const validation = (...args) => {
 
 const isProduction = process.env.NODE_ENV === 'production';
 
+const authMe = async (req, res) => {
+  return res.status(200).json({ user: req.user });
+};
+
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -19,12 +23,12 @@ const login = async (req, res) => {
     }
     const user = await User.findUser(email);
     if (!user) {
-      return res.status(401).json({ error: 'ユーザーが見つかりません' });
+      return res.status(401).json({ message: 'ユーザーが見つかりません' });
     }
 
     const isChecked = await bcrypt.compare(password, user.password_hash);
     if (!isChecked) {
-      return res.status(401).json({ error: 'パスワードが違います' });
+      return res.status(401).json({ message: 'パスワードが違います' });
     }
 
     const token = crypto.randomBytes(16).toString('hex');
@@ -90,4 +94,4 @@ const register = async (req, res) => {
   }
 };
 
-module.exports = { login, logout, register };
+module.exports = { login, logout, register,authMe };

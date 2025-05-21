@@ -77,7 +77,7 @@ describe('authController', () => {
         password: 'null',
       });
       expect(res.statusCode).to.equal(401);
-      expect(res.body).to.deep.equal({ error: 'ユーザーが見つかりません' });
+      expect(res.body).to.deep.equal({ message: 'ユーザーが見つかりません' });
     });
 
     it('パスワードが違う場合はエラー', async () => {
@@ -86,7 +86,7 @@ describe('authController', () => {
         password: 'null',
       });
       expect(res.statusCode).to.equal(401);
-      expect(res.body).to.deep.equal({ error: 'パスワードが違います' });
+      expect(res.body).to.deep.equal({ message: 'パスワードが違います' });
     });
   });
   describe('logout', () => {
