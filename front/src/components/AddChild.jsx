@@ -11,7 +11,7 @@ import {
   RadioGroup,
 } from '@yamada-ui/react';
 import { Calendar } from '@yamada-ui/calendar';
-import { BabyIcon, CakeIcon, VenusAndMarsIcon, XIcon } from '@yamada-ui/lucide';
+import { BabyIcon, CakeIcon, VenusAndMarsIcon } from '@yamada-ui/lucide';
 import { useState } from 'react';
 import { format } from 'date-fns';
 import 'dayjs/locale/ja';
