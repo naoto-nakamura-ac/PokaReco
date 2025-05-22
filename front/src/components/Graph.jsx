@@ -2,16 +2,9 @@ import {
   Card,
   CardHeader,
   CardBody,
-  Avatar,
-  AvatarBadge,
-  HStack,
   VStack,
   Text,
   Box,
-  Separator,
-  Image,
-  Center,
-  color,
 } from '@yamada-ui/react';
 import { LineChart } from '@yamada-ui/charts';
 import { useState, useEffect } from 'react';
@@ -21,11 +14,9 @@ function Graph({
   children,
   maxW = '100%',
   maxH = '100%',
-  fetchRecords,
   param,
 }) {
   const [formatData, setFormatData] = useState(null);
-  console.log('🍣 ~ Graph.jsx:28 ~ param:', param);
   useEffect(() => {
     // fetchRecords();
     if (param && Array.isArray(param)) {
@@ -38,7 +29,6 @@ function Graph({
 
   const formatRecords = () => {
     if (param) {
-      console.log('🍣 ~ Graph.jsx:39 ~ formatRecords ~ param:', param);
       // 並び替えて整形
       const formatted = param
         .slice()

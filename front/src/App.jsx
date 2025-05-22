@@ -4,6 +4,7 @@ import Top from './pages/Top';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
+import HeatChartPDF from './pages/HeatChartPDF';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/export" element={<HeatChartPDF />} />
       </Routes>
     </BrowserRouter>
   );

@@ -54,18 +54,13 @@ function GraphAll({ maxH = '100%', open, onClose }) {
           height: item.height,
           memo: item.memo,
         }));
-      console.log(formatted);
+      // console.log(formatted);
       setFormatData(formatted);
     }
   };
   const series = [
-    {
-      dataKey: 'temperature',
-      color: 'red.500',
-    },
-    {
-      dataKey: 'memo',
-    },
+    { dataKey: 'temperature', color: 'red.500' },
+    { dataKey: 'memo' },
   ];
   return (
     <Dialog
@@ -78,7 +73,7 @@ function GraphAll({ maxH = '100%', open, onClose }) {
     >
       <DialogBody>
         <Box maxW="100%" maxH={maxH} w="full" h="full" bg="whiteAlpha.600">
-          {formatData ? (
+          {formatData?.length > 0 ? (
             <VStack>
               <LineChart
                 height={300}

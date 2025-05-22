@@ -9,16 +9,22 @@ import {
 import { CheckIcon, DownloadIcon, FeatherIcon } from '@yamada-ui/lucide';
 import LogForm from './LogForm';
 import GraphAll from './GraphAll';
+import { useNavigate } from 'react-router-dom';
 
 function MainFunc({ fetchUser, fetchRecords, maxW = 'full' }) {
   const logDialog = useDisclosure();
   const graphDialog = useDisclosure();
+  const navigate = useNavigate()
 
   const registerSuccess = async () => {
     logDialog.onClose();
     fetchUser();
     fetchRecords();
   };
+
+  const navigateExport = () => {
+    navigate('/export')
+  }
 
   return (
     <Box maxW={maxW} w="full" px={4} py={6} h="30vh">
@@ -30,6 +36,7 @@ function MainFunc({ fetchUser, fetchRecords, maxW = 'full' }) {
           <Button
             startIcon={<FeatherIcon />}
             colorScheme="warning"
+            boxShadow="xl"
             flex="1"
             h="full"
             onClick={logDialog.onOpen}
@@ -44,6 +51,7 @@ function MainFunc({ fetchUser, fetchRecords, maxW = 'full' }) {
           <Button
             startIcon={<CheckIcon />}
             colorScheme="warning"
+            boxShadow="xl"
             flex="1"
             h="full"
             onClick={graphDialog.onOpen}
@@ -54,11 +62,12 @@ function MainFunc({ fetchUser, fetchRecords, maxW = 'full' }) {
             open={graphDialog.open}
             onClose={graphDialog.onClose}
             maxW="100%"
-
           />
           <Button
             startIcon={<DownloadIcon />}
+            onClick={navigateExport}
             colorScheme="warning"
+            boxShadow="xl"
             flex="1"
             h="full"
           >
