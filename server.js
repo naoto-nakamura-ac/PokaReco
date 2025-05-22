@@ -11,6 +11,7 @@ const recordsRouter = require('./server/routes/recordsRoutes');
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, '/public')));
 
 app.get('/api', (req, res) => {
   res.send('Hello, World!');
@@ -21,8 +22,7 @@ app.use('/api/users', usersRouter);
 app.use('/api/children', childrenRouter);
 app.use('/api/records', recordsRouter);
 
-app.use(express.static(path.join(__dirname, '/public')));
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/public', 'index.html'));
 });
 
