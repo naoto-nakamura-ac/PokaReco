@@ -121,7 +121,7 @@ function Signup() {
           <Heading size="md">アカウント作成</Heading>
         </CardHeader>
         <CardBody>
-        <FormControl
+          <FormControl
             label="User Name"
             required
             invalid={isInvalidName && !name}
@@ -168,7 +168,7 @@ function Signup() {
             required
             invalid={isInvalidPassword && !password}
             onBlur={passwordBlur}
-            errorMessage="メールアドレスを入力してください"
+            errorMessage="パスワードを入力してください"
           >
             <PasswordInput
               variant="filled"
@@ -193,62 +193,6 @@ function Signup() {
         </CardBody>
       </Card>
     </Center>
-    // <div
-    //   style={{
-    //     height: '100vh',
-    //     display: 'flex',
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //     flexDirection: 'column',
-    //     gap: '20px',
-    //     // background: '#FFF',
-    //   }}
-    // >
-    //   <div
-    //     style={{
-    //       padding: '20px',
-    //       background: '#fff',
-    //       border: '1px solid #ccc',
-    //       borderRadius: '8px',
-    //       boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
-    //       width: '300px',
-    //       display: 'flex',
-    //       flexDirection: 'column',
-    //       gap: '5px',
-    //     }}
-    //   >
-    //     <h2>アカウント作成</h2>
-    //     <input
-    //       type="text"
-    //       placeholder="登録する名前を入力"
-    //       value={name}
-    //       onChange={updateName}
-    //     />
-    //     <input
-    //       type="text"
-    //       placeholder="登録するメールアドレスを入力"
-    //       value={email}
-    //       onChange={updateEmail}
-    //     />
-    //     <input
-    //       type="password"
-    //       placeholder="登録するパスワードを入力"
-    //       value={password}
-    //       onChange={updatePassword}
-    //     />
-    //     <button
-    //       style={{
-    //         width: '100%',
-    //         marginBottom: '8px',
-    //         borderRadius: '9999px',
-    //         border: '1px solid #ccc',
-    //       }}
-    //       onClick={navigateLogin}
-    //     >
-    //       作成
-    //     </button>
-    //   </div>
-    // </div>
   );
 }
 

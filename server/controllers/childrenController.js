@@ -34,6 +34,7 @@ const addChild = async (req, res) => {
     return res.status(500).json({ message: 'Server Error' });
   }
 };
+// #TODO child_idを指定してその子だけ削除できるようにする
 const deleteChild = async (req, res) => {
   try {
     const exitChild = await Children.findChildren(req.user.id);
