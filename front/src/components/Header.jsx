@@ -21,7 +21,7 @@ import { HEADER_HEIGHT } from '../constants/layout';
 import { useNavigate } from 'react-router-dom';
 import AddChild from '../components/AddChild';
 
-function Header({setUser}) {
+function Header({fetchUser}) {
   const drawer = useDisclosure();
   const dialog = useDisclosure();
   const childdialog = useDisclosure();
@@ -68,13 +68,6 @@ function Header({setUser}) {
     }
   };
 
-  const fetchUser = async () => {
-    const res = await fetch('/api/users/myAccount', {
-      credentials: 'include',
-    });
-    const data = await res.json();
-    setUser(data);
-  }
 
   const registerSuccess = async () => {
     drawer.onClose();
