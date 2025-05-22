@@ -16,6 +16,7 @@
     "@yamada-ui/lucide": "^1.10.5",
     "@yamada-ui/react": "^1.7.6",
     "date-fns": "^4.1.0",
+    "moment": "^2.30.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.0"
