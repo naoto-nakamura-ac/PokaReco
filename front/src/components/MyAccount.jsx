@@ -50,7 +50,7 @@ function MyAccount({ user, maxW = 'full' }) {
                 />
               </Avatar>
               <Box textAlign="center" lineHeight="1.2">
-                <Text fontSize="5xl" fontWeight="black" fontFamily="mono">
+                <Text fontSize="xl" fontWeight="black" fontFamily="mono">
                   {name}
                 </Text>
                 <Text fontSize="sm" color="gray.600">
