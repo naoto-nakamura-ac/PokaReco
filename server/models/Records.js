@@ -36,6 +36,10 @@ module.exports = {
   },
 
   async insRecord(insertData) {
-    await db(RECORDS_TABLE).insert(insertData);
+    try {
+      await db(RECORDS_TABLE).insert(insertData);
+    } catch (error) {
+      throw error;
+    }
   },
 };
