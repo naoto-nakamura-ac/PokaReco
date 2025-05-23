@@ -10,7 +10,7 @@
     "migrate-down": "npx knex migrate:down --knexfile server/db/knexfile.js",
     "seed-data": "npx knex seed:run --knexfile server/db/knexfile.js",
     "db:reset": "npx knex migrate:rollback --all --knexfile server/db/knexfile.js && npm run migrate-latest && npm run seed-data",
-    "build": "npm install && npm run migrate-latest && cd front && npm install && npm run build && rm -rf ../public && cp -r dist ../public"
+    "build": "npm install && npm run db:reset && cd front && npm install && npm run build && rm -rf ../public && cp -r dist ../public"
   },
   "keywords": [],
   "author": "",
